@@ -1,3 +1,7 @@
+ ; put you code here
+ ;(Cons $x (Cons $y (Cons $z Nil)))
+(= (free ($n $lit ($xs ($ys ($z Nil))))) ($n $lit ($x $y $z) ))
+
  ;return Litral
 (:getLiteral (-> (Value A Bool LITERAL) LITERAL))
 (= (getLiteral ($value $x $bol $lit)) $lit)
@@ -9,9 +13,7 @@
  ;Return Gurdset tree Values
 (:GuardsetValues (-> List List))
 (= (GuardsetValues Nil) Nil)
-(= (GuardsetValues (Cons $x $xs))
-    (Cons (findValue $x)
-        (GuardsetValues $xs)))
+(= (GuardsetValues (Cons $x $xs)) (  (findValue $x) (GuardsetValues $xs)))
 
  ; check the length of the list
 (:length (-> (List $t) Number))
@@ -27,7 +29,7 @@
 (:postProcessing (-> TreeNode expression))
 (= (postProcessing (TreeNode $val $guard $child)) (
         if ( > (length $guard) 1)
-        (n (getLiteral $val) (GuardsetValues $guard) (getChildren $child))
+        ( (n (getLiteral $val) (GuardsetValues $guard)) (getChildren $child))
         (if ( == (length $guard) 0)
             (n (getLiteral $val) (getChildren $child) )
             (GuardsetValues $guard) )
