@@ -25,7 +25,7 @@
 (= (postProcessing (TreeNode $val $guard $child)) (
         if (> (length $guard) 1)
         (let $x (collapse (GuardsetValues $guard))
-            (n (getLiteral $val) $x (let $b (getChildren $child)   (car-atom $b))))
+            (n (getLiteral $val) $x (let $b (getChildren $child) (car-atom $b))))
         (if ( == (length $guard) 0)
             (n (getLiteral $val) (getChildren $child))
             (GuardsetValues $guard))
