@@ -50,6 +50,33 @@
         (Cons $x ( pop $xs))
     )
 )
+ ;remove element
+(:Remove_element (-> Number List List))
+(= (Remove_element $num (Cons $x $xs) )
+    (
+        if ( and (== $xs Nil) (not (== $num $x)))
+        (Cons $x $xs )
+        (
+            if (== $num $x)
+            $xs
+            (Cons $x (Remove_element $num $xs))
+        )
+
+)
+)
+
+ ;map
+(:map (-> opration Number list list))
+(= (map $opp $num Nil) Nil)
+(= (map $opp $num (Cons $x $xs))
+    (Cons ($opp $num $x) (map $opp $num $xs ))
+)
+
+ ;filter
+(:filter (-> (condition) List List))
+(= (filter ($opp $element $num) (Cons $x $xs))
+    (if ())
+)
 
  ;!(length (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (is_member 5 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
@@ -57,3 +84,6 @@
  ;! (max_value (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (push 8 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (pop (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
+ ;! (Remove_element 7 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
+ ;! (map * 8 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
+! (filter == $x )
