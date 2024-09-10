@@ -136,6 +136,20 @@
 (= (reverse (Cons $x $xs))
     (append (reverse $xs) $x))
 
+ ;fold left
+(= (add_fold $num Nil) ($num Nil))
+(= (foldl ($num Nil)) $num)
+(= (add_fold $num (Cons $x $xs))
+    (let $sum (+ $num $x) (Cons $sum $xs))
+)
+(= (foldl (Cons $x $xs))
+    (foldl (add_fold $x $xs))
+)
+
+ ;fold right
+(= (foldr $list)
+    (let $reverded (reverse $list) (foldl $reverded))
+)
  ;! (length (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (is_member 5 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (Append (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))) (Cons 8 (Cons 9 Nil)))
@@ -149,3 +163,5 @@
  ;! (map * 8 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (filter 2 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (reverse (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
+ ;! (foldl (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
+ ;! (foldr (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
