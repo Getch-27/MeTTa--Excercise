@@ -30,8 +30,31 @@
         (Cons $x (Append $xs $list))
     ))
  ;Maximum value
-(:max-value (->  List Number))
-(= (max_value (Cons $x $xs)) ())
+(:max_value (->  List Number))
+(= (find_max $num Nil) ($num Nil))
+(= (max_value ($num Nil)) $num)
+
+(= (find_max $max (Cons $x $xs))
+    (if (> $max $x)
+        (Cons $max $xs)
+        (Cons $x $xs)
+    )
+)
+(= (max_value (Cons $x $xs)) (max_value (find_max $x $xs)))
+
+ ;minimum_value
+(:min_value (->  List Number))
+(= (find_min $num Nil) ($num Nil))
+(= (min_value ($num Nil)) $num)
+
+(= (find_min $max (Cons $x $xs))
+    (if (< $max $x)
+        (Cons $max $xs)
+        (Cons $x $xs)
+    )
+)
+(= (min_value (Cons $x $xs)) (min_value (find_min $x $xs)))
+
  ;push
 (:push (-> Number List List))
 (= (push $num (Cons $x $xs))
@@ -65,20 +88,15 @@
 
 )
 )
- ;remove duplicate
- ; (:remove_duplicate (-> List List))
- ; (= (remove_duplicate (Cons $x $xs))
- ;     (if () )
- ; )
 
+ ;remove duplicate
+(:remove_duplicate (-> List List))
 (= (remove_duplicate Nil) Nil)
 (= (remove_duplicate (Cons $x $xs))
     (if (is_member $x $xs)
-        (Cons $x (Remove_element $x $xs))
-        (Cons $x (remove_duplicate $xs))
-    )
+        (let $removed (Remove_element $x $xs) (Cons $x (remove_duplicate $removed)))
+        (let $removed (remove_duplicate $xs) (Cons $x $removed)))
 )
-
  ;sort
 (= (sort Nil) Nil)
 (= (insert $num Nil) (Cons $num Nil))
@@ -121,11 +139,12 @@
  ;! (length (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (is_member 5 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (Append (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))) (Cons 8 (Cons 9 Nil)))
- ;! (max_value (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
+ ;! (max_value (Cons 100 (Cons 2 (Cons 9 (Cons 900 (Cons 5 (Cons 10 (Cons 700 Nil))))))))
+ ;! (min_value (Cons 100 (Cons 2 (Cons 9 (Cons 900 (Cons 5 (Cons 10 (Cons 700 Nil))))))))
  ;! (push 8 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (pop (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
-! (Remove_element 7 (Cons 7 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 7 (Cons 7 Nil))))))))
- ;! (remove_duplicate (Cons 2 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 3 Nil))))))))
+ ;! (Remove_element 7 (Cons 7 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 7 (Cons 7 Nil))))))))
+ ;! (remove_duplicate (Cons 2 (Cons 2 (Cons 3 (Cons 2 (Cons 5 (Cons 5 (Cons 3 Nil))))))))
  ;! (sort (Cons 6 (Cons 13 (Cons 3 (Cons 4 (Cons 8 (Cons 6 (Cons 7 Nil))))))))
  ;! (map * 8 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
  ;! (filter 2 (Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil))))))))
