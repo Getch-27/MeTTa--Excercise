@@ -52,4 +52,4 @@
 
 
 
-!(gatherJunctors (AND A (AND B (OR C (OR D (AND E (AND F G)))))))
+!(gatherJunctors (NOT (AND A (AND B (NOT (OR C (OR D (AND E (AND F G)))))))))
