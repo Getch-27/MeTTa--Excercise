@@ -1,0 +1,10 @@
+Input: ($X ($Y ())) ($Z  ($W ($A ())))
+Output: (
+    ($Z $W $A) ($Z $W $X) ($Z $W $Y) ($Z $A $X)
+    ($Z $A $Y) ($Z $X $W) ($Z $X $A) ($Z $X $Y)
+    ($Z $Y $W) ($Z $Y $A) ($W $A $X) ($W $A $Y)
+    ($W $X $A) ($W $X $Y) ($W $Y $A) ($A $X $Y)
+    ($X $Z $W) ($X $Z $A) ($X $Z $Y) ($X $W $A)
+    ($X $W $Y) ($X $A $Y) ($X $Y $Z) ($X $Y $W)
+    ($X $Y $A) ($Y $Z $W) ($Y $Z $A) ($Y $W $A))
+($A $W $Z)
