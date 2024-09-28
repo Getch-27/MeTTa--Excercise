@@ -12,14 +12,18 @@
     )
 )
 
-(=(propagateNot NOT ($tuple))
-  (propagateNot NOT (car-atom $tuple) (cdr-atom $tuple))
-) 
-(= (propagateNot NOT OR $tuple) ())
+(=(propagateNot NOT ($tuple)) (propagateNot NOT (car-atom $tuple) (cdr-atom $tuple))) 
+(= (propagateNot NOT AND $tuple) (let $res (propagateChildrens $tuple) (OR $res)) )
+(= (propagateNot NOT OR $tuple) (let $res (propagateChildrens $tuple) (AND $res)))
+(= (propagateNot NOT NOT $tuple) (extract $tuple))
+(=(propagateNot NOT $tuple) 
+    (if (== (get-metatype $tuple) Expression)
+       (extract $tuple) 
+       (NOT $tuple)
+))
 
-(= (propagateNot AND $tuple)
-   (let $res (propagateChildrens $tuple) (AND $res))
-)
+(= (propagateNot AND $tuple) (let $res (propagateChildrens $tuple) (AND $res)))
+(= (propagateNot OR $tuple) (let $res (propagateChildrens $tuple) (OR $res)))
 
 
 (= (extract $expr)
