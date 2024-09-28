@@ -1,9 +1,10 @@
 ; (: propagateNot (-> $expr $expr))
 
-(= (propagateNot AND $tuple) 
-  $tuple
+(= (propagateNot AND $tuple)
+  (AND  (propagateNot (car-atom $tuple)) (propagateNot (cdr-atom $tuple)))
 )
-(= (propagateNot NOT ($tuple)) $tuple)
+
+;(= (propagateNot NOT ($tuple)) $tuple)
 
 (= (propagateNot $expr)
     (let* (
@@ -15,5 +16,5 @@
 )
 
 ;; Example usage with n-ary expressions:
-! (propagateNot (NOT (AND (NOT (OR (AND G F E) D C)) B A)))
+;! (propagateNot (NOT (AND (NOT (OR (AND G F E) D C)) B A)))
 ! (propagateNot (AND (NOT (OR (AND G F E) D C)) B A))
