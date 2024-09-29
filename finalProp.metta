@@ -1,3 +1,5 @@
+(=(AND $x) (cons-atom AND $x))
+(=(OR $x) (cons-atom OR $x))
 (=(propagateChildrens $tuple) (collapse (propagateNot (superpose $tuple))))
 (=(propagateNotChildrens $tuple) (collapse (propagateNot NOT (superpose $tuple))))
 
