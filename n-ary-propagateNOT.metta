@@ -12,18 +12,19 @@
     )
 )
 
-(=(propagateNot NOT ($tuple)) (propagateNot NOT (car-atom $tuple) (cdr-atom $tuple))) 
-(= (propagateNot NOT AND $tuple) (let $res (propagateChildrens $tuple) (OR $res)) )
-(= (propagateNot NOT OR $tuple) (let $res (propagateChildrens $tuple) (AND $res)))
-(= (propagateNot NOT NOT $tuple) (extract $tuple))
-(=(propagateNot NOT $tuple) 
-    (if (== (get-metatype $tuple) Expression)
-       (extract $tuple) 
-       (NOT $tuple)
+;(=(propagateNot NOT ($tuple)) (propagateNot NOT (car-atom $tuple) (cdr-atom $tuple))) 
+;(= (propagateNot NOT AND $tuple) (let $res (propagateChildrens $tuple) (OR $res)) )
+;(= (propagateNot NOT OR $tuple) (let $res (propagateChildrens $tuple) (AND $res)))
+;(= (propagateNot NOT NOT $tuple) (extract $tuple))
+
+(=(propagateNot NOT $tuple) (if (== (get-metatype $tuple) Expression)
+      (let $c (extract $tuple) ($c))  
+      (NOT $tuple)
 ))
 
+;(=(propagateNot $tuple ()) (extract $tuple))
 (= (propagateNot AND $tuple) (let $res (propagateChildrens $tuple) (AND $res)))
-(= (propagateNot OR $tuple) (let $res (propagateChildrens $tuple) (OR $res)))
+;(= (propagateNot OR $tuple) (let $res (propagateChildrens $tuple) (OR $res)))
 
 
 (= (extract $expr)
@@ -35,9 +36,12 @@
     )
 )
 
+
+
+
 ;; Example usage with n-ary expressions:
 ;! (propagateNot (NOT (AND (NOT (OR (AND G F E) D C)) B A)))
-! (extract (AND (NOT (OR (AND G F E) D C)) B A))
+!(extract (AND (NOT (OR (AND G F E) D C)) B A))
 
 ;(AND ((NOT (OR (AND G F E) D C)) B A))
 
@@ -57,3 +61,12 @@
 ;(= (propagateNot NOT OR $tuple)
 ; (AND (propagateNot NOT (car-atom $tuple)) (propagateNot NOT (cdr-atom $tuple)))
 ;)
+
+// (=(propagateNot NOT $expr) 
+// (
+//    if ( == (get-metatype $expr) Symbol)
+//        (NOT $expr)
+//        (propagateNot NOT ss)
+// )
+// )
+//(= (propagateNot NOT OR $tuple) (let $res (propagateNotChildrens $tuple) (AND $res)))
