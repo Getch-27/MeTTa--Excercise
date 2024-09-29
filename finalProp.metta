@@ -1,5 +1,11 @@
 (=(AND $x) (cons-atom AND $x))
 (=(OR $x) (cons-atom OR $x))
+(=(isExpression $tuple) (
+   if(== (get-metatype $tuple) Expression)
+     True
+     False
+))
+
 (=(propagateChildrens $tuple) (collapse (propagateNot (superpose $tuple))))
 (=(propagateNotChildrens $tuple) (collapse (propagateNot NOT (superpose $tuple))))
 
@@ -10,9 +16,9 @@
 (= (propagateNot NOT NOT $tuple) (propagateNot $tuple))
 
 (=(propagateNot NOT $expr)(
-    if(== (get-metatype $expr) Expression)
+    if(isExpression $expr)
        (let $x (car-atom $expr) 
-       (if(== (get-metatype $x) Expression)
+       (if(isExpression $x)
           (propagateNot NOT (car-atom $x) (cdr-atom $x))
           (propagateNot NOT $x (cdr-atom $expr))
          ))
@@ -21,7 +27,7 @@
 
 (=(propagateNot $expr) 
  (
-    if (== (get-metatype $expr) Expression)
+    if (isExpression $expr)
        (
         let* (
                 ($op (car-atom $expr)) 
