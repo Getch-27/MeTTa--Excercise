@@ -56,3 +56,5 @@
         )
 )
 )
+
+!(propagateTruthValue (TreeNode (Value Nil False ROOT) Nil (Cons NilNode (Cons (TreeNode (Value Nil False NOT) Nil (Cons NilNode (Cons (TreeNode (Value Nil False NOT) Nil (Cons NilNode (Cons (TreeNode (Value A False LITERAL) Nil Nil) Nil))) Nil))) Nil))) True)

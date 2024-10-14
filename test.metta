@@ -1,20 +1,22 @@
-(: propagateNot (-> $expr $expr))
-($logic $a $b)
-(= (propagateNot $expr)
-    (unify &self $expr $x Fail)
+;; taskes  
+;; removeElement
+(= (removeElement $x $y) (collapse (subtraction (superpose $y)  (superpose $x))))
+;removeCommonLiterals
+(= (removeCommonLiterals $list1 $list2)(collapse (removeElement $list1 (superpose $list2))))
 
+
+!(removeElement (A B) (A C B H))
+
+
+!(removeCommonLiterals (A B) ((A C B H) (A B D) (A C F B)))
+
+(= (isMember $x $list)
+    (if (== $list ()) False
+        (not (== (intersection (superpose $x) (superpose $list)) ()))
+    )
 )
- ; (= (propagateNot $expr)
- ;     (case $expr
- ;         (
- ;             ( ($logic $a $b) ($logic (propagateNot $a) (propagateNot $b)))
- ;             ( (NOT (AND $b $c)) (OR (propagateNot (NOT $b)) (propagateNot (NOT $c))))
- ;             ( (NOT (OR $b $c)) (AND (propagateNot (NOT $b)) (propagateNot (NOT $c))))
- ;             ( (NOT (NOT $x)) (propagateNot $x))
- ;             ( (NOT $symbol) (NOT $symbol))
- ;             ( $symbol  $symbol)
- ;         )
- ; )
- ; )
-
-! (propagateNot (NOT (AND (AND I (AND J (NOT (OR K (OR L M))))) (AND B (NOT (AND C (OR D (OR E (NOT (OR F (AND G H)))))))))))
+!(isMember (1) ())
+!(isMember (1) (2 3 4 5)) 
+!(isMember (3) (1 2 4 5)) 
+!(assertEqualToResult (isMember (1) ()) (False))
+!(assertEqualToResult (isMember (2) (2 3 4 5)) (True) )
