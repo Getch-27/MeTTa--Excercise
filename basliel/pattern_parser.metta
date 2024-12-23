@@ -35,4 +35,5 @@
 
 )
 
-! (parse_expression  (Inherie (y (b (a (Nil (Inherie (y (x (a (Nil (Inheritance (y (x (b (d (Nil ())))))))))))))))))
+! (parse_expression  (Inheritance (y (b (a (Nil (Inheritance (y (x (a (Nil (Inheritance (y (x (b (d (Nil ())))))))))))))))))
+;; Output ((Inheritance y b a) (Inheritance y x a) (Inheritance y x b d))
