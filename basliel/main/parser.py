@@ -36,3 +36,7 @@ def parse_expression(expression):
     # Removing final extra bracket
     final_result = result[:-1]
     return " ".join(final_result)
+
+expression = "(Inheritance (y (x (a (u (Nil (Inheritance (y (x (a (Nil (Inheritance (y (x (b (d (Nil ())))))))))))))))))"
+parsed_expression = parse_expression(expression)
+print(parsed_expression)  ## ( Inheritance y x a u) ( Inheritance y x a) ( Inheritance y x b d)
